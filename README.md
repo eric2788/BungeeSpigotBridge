@@ -10,4 +10,5 @@ a Test Plugin to avoid Bungee UUID Spoof hack
   
   
 ## Showcase
-  ![show](https://cdn.discordapp.com/attachments/465057493408808960/630390396635185203/2019-10-06_21-05-46.mp4)
+  You can check here (https://youtu.be/2IszeOf7KwU)
+  
