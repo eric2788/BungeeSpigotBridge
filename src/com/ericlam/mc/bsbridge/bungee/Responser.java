@@ -35,7 +35,14 @@ class Responser extends Thread {
                 }
                 ProxyServer.getInstance().getLogger().info("[DEBUG] Received Message: " + line);
                 UUID[] uuids = BungeePlugin.cyberKey.decrypt(line);
-                if (uuids == null) continue;
+                if (uuids == null || uuids.length < 2) continue;
+                UUID user = uuids[0];
+                if (ProxyServer.getInstance().getPlayer(user) == null) {
+                    ProxyServer.getInstance().getLogger().warning("Unknown User Request " + user.toString());
+                    writer.println(BungeePlugin.cyberKey.encrypt(uuids[0]));
+                    writer.flush();
+                    continue;
+                }
                 ProxyServer.getInstance().getLogger().info("Received: " + Arrays.toString(uuids));
                 writer.println(BungeePlugin.cyberKey.encrypt(uuids[1]));
                 writer.flush();
