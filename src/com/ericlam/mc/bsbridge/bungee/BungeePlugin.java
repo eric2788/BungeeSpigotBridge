@@ -46,7 +46,7 @@ public class BungeePlugin extends Plugin {
 
 
     private void launchConnection(ServerSocket serverSocket) {
-        getLogger().info("正在監察端口 " + serverSocket.getLocalPort() + "....");
+        getLogger().info("Listening the socket port " + serverSocket.getLocalPort() + "....");
         while (true) {
             Socket socket;
             try {
@@ -55,7 +55,7 @@ public class BungeePlugin extends Plugin {
                 System.out.println("I/O error: " + e);
                 continue;
             }
-            getLogger().info("分流已連接：" + socket.getRemoteSocketAddress());
+            getLogger().info("Server Connected：" + socket.getRemoteSocketAddress());
             new Responser(socket).start();
         }
     }

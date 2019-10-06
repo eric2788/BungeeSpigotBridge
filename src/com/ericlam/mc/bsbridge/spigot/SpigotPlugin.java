@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class SpigotPlugin extends JavaPlugin implements Listener {
 
@@ -34,20 +35,20 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
             try {
                 cyberKey = new CyberKey(new File(getDataFolder(), "cyberkey.aes"));
                 Socket socket = new Socket();
-                getLogger().info("正在嘗試連線到 " + host + ":" + port);
+                getLogger().info("Trying to connect with bungee " + host + ":" + port);
                 socket.connect(new InetSocketAddress(host, port), 30000);
                 socket.setKeepAlive(true);
                 socket.setSoTimeout(10000);
                 if (socket.isConnected()) {
-                    getLogger().info("伺服器連線成功");
+                    getLogger().info("Server Connected Successfully");
                 } else {
-                    getLogger().info("伺服器連線失敗");
+                    getLogger().log(Level.SEVERE, "Server Connection failed");
                     return;
                 }
                 messager = new Messager(socket);
             } catch (Exception e) {
                 if (e instanceof SocketException) {
-                    System.out.println("伺服器已中斷連接，請重啟伺服器");
+                    getLogger().warning("You have disconnected with bungee, please restart the server to ensure the security ");
                     return;
                 }
                 e.printStackTrace();
@@ -71,7 +72,7 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        getLogger().info("Verified Failed.");
+        getLogger().warning("Verified Failed.");
         e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
         e.setKickMessage("§eYou are not allowed to join without go through our own proxy.");
     }

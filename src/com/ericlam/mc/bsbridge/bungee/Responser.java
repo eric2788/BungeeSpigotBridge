@@ -1,5 +1,8 @@
 package com.ericlam.mc.bsbridge.bungee;
 
+import net.md_5.bungee.api.ProxyServer;
+import org.bukkit.Bukkit;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
@@ -25,16 +28,16 @@ class Responser extends Thread {
                 writer = new PrintWriter(socket.getOutputStream());
                 line = reader.readLine();
                 if (line == null){
-                    System.out.println("分流 " + socket.getInetAddress() + " 已斷開連線。");
+                    Bukkit.getLogger().info("Server " + socket.getInetAddress() + " has disconnected with bungee.");
                     break;
                 }
                 if (line.isEmpty()) {
                     continue;
                 }
-                System.out.println("Received Message: "+line);
+                ProxyServer.getInstance().getLogger().info("[DEBUG] Received Message: " + line);
                 UUID[] uuids = BungeePlugin.cyberKey.decrypt(line);
                 if (uuids == null) continue;
-                System.out.println("Received: " + Arrays.toString(uuids));
+                ProxyServer.getInstance().getLogger().info("Received: " + Arrays.toString(uuids));
                 writer.println(BungeePlugin.cyberKey.encrypt(uuids[1]));
                 writer.flush();
             }
@@ -43,7 +46,7 @@ class Responser extends Thread {
             socket.close();
         } catch (IOException e) {
             if (e instanceof SocketException) {
-                System.out.println("分流 " + socket.getInetAddress() + " 強制中斷了連線: " + e.getMessage());
+                ProxyServer.getInstance().getLogger().warning("Server" + socket.getInetAddress() + " Connection has disconnected: " + e.getMessage());
                 return;
             }
             e.printStackTrace();

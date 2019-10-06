@@ -1,5 +1,7 @@
 package com.ericlam.mc.bsbridge.spigot;
 
+import org.bukkit.Bukkit;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -17,15 +19,15 @@ public class Messager {
 
     synchronized boolean verify(final UUID uuid, final UUID randomUUID) throws IOException {
         if (uuid == null || randomUUID == null) return false;
-        System.out.println("Sending: " + uuid.toString() + " and " + randomUUID.toString());
+        Bukkit.getLogger().info("[DEBUG] Sending: " + uuid.toString() + " and " + randomUUID.toString());
         String msg = SpigotPlugin.cyberKey.encrypt(uuid, randomUUID);
-        System.out.println("send-message: " + msg);
+        Bukkit.getLogger().info("[DEBUG] send-message: " + msg);
         writer.println(msg);
         writer.flush();
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
         String str = reader.readLine();
         if (str == null) {
-            System.out.println("已與伺服器中斷了連接");
+            Bukkit.getLogger().warning("You have disconnected with bungee");
             return false;
         }
         if (str.isEmpty()) return false;
