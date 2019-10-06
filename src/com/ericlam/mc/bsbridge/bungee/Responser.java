@@ -37,7 +37,7 @@ class Responser extends Thread {
                 UUID[] uuids = BungeePlugin.cyberKey.decrypt(line);
                 if (uuids == null || uuids.length < 2) continue;
                 UUID user = uuids[0];
-                if (ProxyServer.getInstance().getPlayer(user) == null) {
+                if (!BungeePlugin.queue.remove(user)) {
                     ProxyServer.getInstance().getLogger().warning("Unknown User Request " + user.toString());
                     writer.println(BungeePlugin.cyberKey.encrypt(UUID.randomUUID()));
                     writer.flush();
