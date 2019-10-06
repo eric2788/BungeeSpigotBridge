@@ -19,9 +19,9 @@ public class Messager {
 
     synchronized boolean verify(final UUID uuid, final UUID randomUUID) throws IOException {
         if (uuid == null || randomUUID == null) return false;
-        Bukkit.getLogger().info("[DEBUG] Sending: " + uuid.toString() + " and " + randomUUID.toString());
+        //Bukkit.getLogger().info("[DEBUG] Sending: " + uuid.toString() + " and " + randomUUID.toString());
         String msg = SpigotPlugin.cyberKey.encrypt(uuid, randomUUID);
-        Bukkit.getLogger().info("[DEBUG] send-message: " + msg);
+        //Bukkit.getLogger().info("[DEBUG] send-message: " + msg);
         writer.println(msg);
         writer.flush();
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));

@@ -6,7 +6,6 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.UUID;
 
 class Responser extends Thread {
@@ -33,7 +32,7 @@ class Responser extends Thread {
                 if (line.isEmpty()) {
                     continue;
                 }
-                ProxyServer.getInstance().getLogger().info("[DEBUG] Received Message: " + line);
+                //ProxyServer.getInstance().getLogger().info("[DEBUG] Received Message: " + line);
                 UUID[] uuids = BungeePlugin.cyberKey.decrypt(line);
                 if (uuids == null || uuids.length < 2) continue;
                 UUID user = uuids[0];
@@ -43,7 +42,7 @@ class Responser extends Thread {
                     writer.flush();
                     continue;
                 }
-                ProxyServer.getInstance().getLogger().info("Received: " + Arrays.toString(uuids));
+                //ProxyServer.getInstance().getLogger().info("Received: " + Arrays.toString(uuids));
                 writer.println(BungeePlugin.cyberKey.encrypt(uuids[1]));
                 writer.flush();
             }
