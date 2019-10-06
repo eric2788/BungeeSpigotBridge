@@ -7,3 +7,8 @@ a Test Plugin to avoid Bungee UUID Spoof hack
 
 ## Download
   You can download from [here](http://www.mediafire.com/file/yl75fip8x3z6he7/BungeeSpigotBridge.jar/file)
+  
+  
+## Showcase
+  You can check here (https://youtu.be/2IszeOf7KwU)
+  
