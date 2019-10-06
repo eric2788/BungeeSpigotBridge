@@ -32,7 +32,6 @@ public class BungeePlugin extends Plugin {
             int port = config.getInt("port");
             getProxy().getScheduler().runAsync(this, () -> {
                 try {
-                    cyberKey = new CyberKey(new File(getDataFolder(), "cyberkey.aes"));
                     ServerSocket socket = new ServerSocket(port);
                     launchConnection(socket);
                 } catch (Exception e) {
