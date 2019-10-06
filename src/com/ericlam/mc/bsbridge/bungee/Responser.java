@@ -1,7 +1,6 @@
 package com.ericlam.mc.bsbridge.bungee;
 
 import net.md_5.bungee.api.ProxyServer;
-import org.bukkit.Bukkit;
 
 import java.io.*;
 import java.net.Socket;
@@ -28,7 +27,7 @@ class Responser extends Thread {
                 writer = new PrintWriter(socket.getOutputStream());
                 line = reader.readLine();
                 if (line == null){
-                    Bukkit.getLogger().info("Server " + socket.getInetAddress() + " has disconnected with bungee.");
+                    ProxyServer.getInstance().getLogger().info("Server " + socket.getInetAddress() + " has disconnected with bungee.");
                     break;
                 }
                 if (line.isEmpty()) {

@@ -34,6 +34,10 @@ public class Messager {
         return SpigotPlugin.cyberKey.verify(str, randomUUID);
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     void close() {
         writer.close();
     }
