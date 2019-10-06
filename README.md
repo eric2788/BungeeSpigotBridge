@@ -15,7 +15,7 @@ and the owner bungee will response whether the queue has contained the player. A
 
 
 ## Draw backs:
- - You need open an extra port for socket connection
+ - You need to open an extra port for socket connection
 
 ## Download
   You can download from [here](http://www.mediafire.com/file/yl75fip8x3z6he7/BungeeSpigotBridge.jar/file)
