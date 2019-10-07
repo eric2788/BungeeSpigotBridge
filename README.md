@@ -4,6 +4,8 @@ a Test Plugin to avoid Bungee UUID Spoof hack
 ## What's the plugin for ?
 This plugin prevent the uuid spoofing via socket connection. Unlike any anti uuid spoofing plugin, this plugin checks whether the player has gone through your own proxy to ensure the connection is legal instead of verifying the uuid.
 
+**THE PLUGIN WON'T WORK IF YOU ARE NOT ON BUNGEECORD NETWORK!**
+
 ## How's the plugin work ?
 The plugin adds the player to a queue when joining with owner bungee.
 Then when spigot server gonna find out whether the player is go through from owner bungee, it will send a socket message to owner bungee,
