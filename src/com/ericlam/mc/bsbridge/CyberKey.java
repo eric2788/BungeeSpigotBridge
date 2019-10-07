@@ -73,7 +73,8 @@ public class CyberKey {
                     UUID.fromString(uuids[1])
             };
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Received an unknown Message, decryption failed!");
+            System.out.println("Error: " + e.getMessage());
         }
 
         return null;
@@ -86,7 +87,8 @@ public class CyberKey {
             byte[] msg = cipher.doFinal(by);
             return randomUUID.toString().equals(new String(msg));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Received an unknown Message, decryption failed!");
+            System.out.println("Error: " + e.getMessage());
         }
         return false;
     }
