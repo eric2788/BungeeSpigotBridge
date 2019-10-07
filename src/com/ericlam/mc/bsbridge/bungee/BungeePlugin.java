@@ -3,6 +3,7 @@ package com.ericlam.mc.bsbridge.bungee;
 import com.ericlam.mc.bsbridge.CyberKey;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.event.ServerConnectEvent;
+import net.md_5.bungee.api.event.ServerConnectedEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -60,6 +61,11 @@ public class BungeePlugin extends Plugin implements Listener {
     @EventHandler
     public void onPlayerLogin(final ServerConnectEvent e) {
         queue.add(e.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onPlayerLogon(final ServerConnectedEvent e) {
+        queue.remove(e.getPlayer().getUniqueId());
     }
 
 
