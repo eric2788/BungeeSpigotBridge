@@ -73,8 +73,8 @@ public class CyberKey {
                     UUID.fromString(uuids[1])
             };
         } catch (Exception e){
-            System.out.println("[BungeeSpigotBridge] Received an unknown Message, decryption failed!");
-            System.out.println("[BungeeSpigotBridge] Error: " + e.getMessage());
+            System.out.println("[BungeeSpigotBridge] decryption failed!");
+            System.out.println("[BungeeSpigotBridge] Error: " + e);
         }
 
         return null;
@@ -87,7 +87,7 @@ public class CyberKey {
             byte[] msg = cipher.doFinal(by);
             return randomUUID.toString().equals(new String(msg));
         } catch (Exception e) {
-            System.out.println("[BungeeSpigotBridge] Received an unknown Message, decryption failed!");
+            System.out.println("[BungeeSpigotBridge] decryption failed!");
             System.out.println("[BungeeSpigotBridge] Error: " + e.getMessage());
         }
         return false;

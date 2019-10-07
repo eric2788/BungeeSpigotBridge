@@ -2,6 +2,7 @@ package com.ericlam.mc.bsbridge.spigot;
 
 import com.ericlam.mc.bsbridge.CyberKey;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,7 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
     static CyberKey cyberKey;
     private Messager messager;
     private FileConfiguration config;
+    private String unknownProxyMsg, verifyFailedMsg;
 
     @Override
     public void onEnable() {
@@ -29,20 +31,10 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
         File serverConfig = new File(getDataFolder(), "connect.yml");
         if (!serverConfig.exists()) saveResource("connect.yml", true);
         config = YamlConfiguration.loadConfiguration(serverConfig);
+        unknownProxyMsg = ChatColor.translateAlternateColorCodes('&', Optional.ofNullable(config.getString("messages.verify-failed")).orElse("&eVerification Failed, Please try again."));
+        verifyFailedMsg = ChatColor.translateAlternateColorCodes('&', Optional.ofNullable(config.getString("messages.unknown-proxy")).orElse("&eYou are not allowed to join without go through our own proxy."));
         launchConnection();
-        /*
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, ()->{
-            Socket socket = messager.getSocket();
-            if (socket == null) return;
-            if (socket.isClosed()){
-                getLogger().warning("Bungee has closed, trying to  reconnect");
-                launchConnection();
-            }
-        },30L, 200L);
-
-         */
     }
-
 
     private void launchConnection() {
         int port = config.getInt("port");
@@ -75,7 +67,7 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        messager.close();
+        if (messager != null) messager.close();
     }
 
     @EventHandler
@@ -88,10 +80,10 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
         } catch (IOException ex) {
             getLogger().warning("Connection Error: " + ex.getMessage());
             launchConnection();
-            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "§eVerification Failed, Please try again");
+            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, this.verifyFailedMsg);
             return;
         }
-        getLogger().warning("Verified Failed.");
-        e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "§eYou are not allowed to join without go through our own proxy.");
+        getLogger().warning("Verify Failed.");
+        e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, this.unknownProxyMsg);
     }
 }
