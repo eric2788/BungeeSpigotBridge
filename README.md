@@ -1,8 +1,8 @@
 # BungeeSpigotBridge
-a Test Plugin to avoid Bungee UUID Spoof hack
+a Test Plugin to avoid Bungee UUID Spoof hack through preventing player using non-verified proxy to join your spigot servers.
 
 ## What's the plugin for ?
-This plugin prevent the uuid spoofing via socket connection. Unlike any anti uuid spoofing plugin, this plugin checks whether the player has gone through your own proxy to ensure the connection is legal instead of verifying the uuid.
+This plugin prevent player using non-verified proxy to join your spigot servers. Unlike any ipwhitelist plugin, this plugin using socket communication to ensure the connection is legal instead of checking the IP from player so that to prevent IP Spoofing for bypassing the ipwhitelist. **you can use it for anti-uuid spoofing and prevent ipwhitelist bypass.**
 
 **THE PLUGIN WON'T WORK IF YOU ARE NOT ON BUNGEECORD NETWORK!**
 
