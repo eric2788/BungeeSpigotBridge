@@ -31,8 +31,8 @@ public class SpigotPlugin extends JavaPlugin implements Listener {
         File serverConfig = new File(getDataFolder(), "connect.yml");
         if (!serverConfig.exists()) saveResource("connect.yml", true);
         config = YamlConfiguration.loadConfiguration(serverConfig);
-        unknownProxyMsg = ChatColor.translateAlternateColorCodes('&', Optional.ofNullable(config.getString("messages.verify-failed")).orElse("&eVerification Failed, Please try again."));
-        verifyFailedMsg = ChatColor.translateAlternateColorCodes('&', Optional.ofNullable(config.getString("messages.unknown-proxy")).orElse("&eYou are not allowed to join without go through our own proxy."));
+        unknownProxyMsg = ChatColor.translateAlternateColorCodes('&', Optional.ofNullable(config.getString("messages.unknown-proxy")).orElse("&eYou are not allowed to join without go through our own proxy."));
+        verifyFailedMsg = ChatColor.translateAlternateColorCodes('&', Optional.ofNullable(config.getString("messages.verify-failed")).orElse("&eVerification Failed, Please try again."));
         launchConnection();
     }
 
